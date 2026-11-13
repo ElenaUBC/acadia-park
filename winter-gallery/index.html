@@ -91,6 +91,18 @@ section h2{font-size:clamp(2rem,6vw,3.2rem);margin-bottom:22px}
 .note{margin:12px 0 0;font-size:.9rem;color:#E9E0CC}
 .sel{user-select:all;font-weight:700}
 .ways{grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
+.btn.big{min-height:62px;padding:14px 38px;font-size:1.25rem;box-shadow:0 6px 0 #B98A1E}
+.btn.big:hover{transform:translateY(-2px)}
+dialog.mail{margin:auto;border:0;border-radius:24px;padding:0;max-width:min(460px,calc(100vw - 32px));width:100%;background:var(--cream);color:var(--ink)}
+dialog.mail::backdrop{background:rgba(6,25,19,.7)}
+.mail .in{padding:24px;display:grid;gap:12px}
+.mail h3{font-size:1.6rem}
+.mail .subj{margin:0;font-size:.95rem;color:#43403a}
+.mail .opt{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:14px;border:2px solid var(--pine);color:var(--pine);font:800 1.02rem/1.2 var(--body);text-decoration:none;background:transparent;cursor:pointer;width:100%}
+.mail .opt.first{background:var(--pine);color:var(--cream)}
+.mail .opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.mail .small{margin:0;font-size:.85rem;color:#6b665c;text-align:center}
+.mail .close{background:none;border:0;font:700 .95rem var(--body);color:#6b665c;cursor:pointer;justify-self:center;padding:6px 12px}
 /* faq */
 details{border-top:1px solid rgba(255,246,229,.18);padding-block:14px}
 details:last-of-type{border-bottom:1px solid rgba(255,246,229,.18)}
@@ -123,11 +135,11 @@ footer img{height:64px;width:auto;display:block}
     <p class="where"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Acadia Highrise Social Space</p>
 
     <div class="cta">
-      <a class="btn primary" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20art%20submission&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20submit%20artwork%20for%20the%20Winter%20Gallery.%0D%0A%0D%0ATitle%3A%20%0D%0AArtist%20name%20and%20age%3A%20%0D%0AType%20of%20art%3A%20%0D%0ANeeds%20wall%20or%20table%20space%3A%20%0D%0A%0D%0AI%20have%20attached%20a%20photo%20of%20my%20piece.">Submit art</a>
+      <a class="btn primary big" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20volunteer%20sign-up&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20volunteer%20at%20the%20Winter%20Gallery.%0D%0A%0D%0AWhen%20I%20can%20help%3A%20%0D%0AWhat%20I%20would%20like%20to%20help%20with%3A%20">Volunteer</a>
+      <a class="btn ghost" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20art%20submission&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20submit%20artwork%20for%20the%20Winter%20Gallery.%0D%0A%0D%0ATitle%3A%20%0D%0AArtist%20name%20and%20age%3A%20%0D%0AType%20of%20art%3A%20%0D%0ANeeds%20wall%20or%20table%20space%3A%20%0D%0A%0D%0AI%20have%20attached%20a%20photo%20of%20my%20piece.">Submit art</a>
       <a class="btn ghost" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20performance%20sign-up&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20perform%20in%20the%20Winter%20Gallery%20opening%20show.%0D%0A%0D%0AMy%20name%20or%20group%20name%3A%20%0D%0AType%20of%20performance%3A%20%0D%0AHow%20long%20it%20is%3A%20%0D%0AWhat%20I%20need%20%28microphone%2C%20speaker%2C%20chair...%29%3A%20">Sign up to perform</a>
-      <a class="btn ghost" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20volunteer%20sign-up&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20volunteer%20at%20the%20Winter%20Gallery.%0D%0A%0D%0AWhen%20I%20can%20help%3A%20%0D%0AWhat%20I%20would%20like%20to%20help%20with%3A%20">Volunteer</a>
     </div>
-    <p class="note">Each button opens a ready-to-send email to <span class="sel">e.kolmogorov@ubc.ca</span>.</p>
+    <p class="note">Each button helps you send a ready-to-go email to <span class="sel">e.kolmogorov@ubc.ca</span>.</p>
   </div>
 </header>
 
@@ -197,6 +209,47 @@ function drawLights(){
 }
 drawLights();
 let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawLights, 150); });
+</script>
+<dialog class="mail" id="mail">
+  <div class="in">
+    <h3 id="mailTitle">Send an email</h3>
+    <p class="subj" id="mailSubj"></p>
+    <a class="opt first" id="optApp" href="#">Open my email app</a>
+    <a class="opt" id="optOutlook" href="#" target="_blank" rel="noopener">Outlook / UBC email (web)</a>
+    <a class="opt" id="optGmail" href="#" target="_blank" rel="noopener">Gmail (web)</a>
+    <button class="opt" id="optCopy" type="button">Copy the email</button>
+    <p class="small">Or write to <b>e.kolmogorov@ubc.ca</b></p>
+    <button class="close" id="mailClose" type="button">Close</button>
+  </div>
+</dialog>
+<script>
+(function(){
+  const dlg=document.getElementById('mail'), TO='e.kolmogorov@ubc.ca';
+  let cur={subject:'',body:''};
+  const enc=encodeURIComponent;
+  document.querySelectorAll('a[href^="mailto:"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const u=new URL(a.href.replace(/&amp;/g,'&'));
+      cur={subject:u.searchParams.get('subject')||'',body:(u.searchParams.get('body')||'').replace(/\r\n/g,'\n')};
+      if(typeof dlg.showModal!=='function') return; /* very old browsers: let the plain email link work */
+      e.preventDefault();
+      document.getElementById('mailTitle').textContent=a.textContent.trim();
+      document.getElementById('mailSubj').textContent='Subject: '+cur.subject;
+      document.getElementById('optApp').href=a.href;
+      document.getElementById('optOutlook').href='https://outlook.office.com/mail/deeplink/compose?to='+enc(TO)+'&subject='+enc(cur.subject)+'&body='+enc(cur.body);
+      document.getElementById('optGmail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+enc(TO)+'&su='+enc(cur.subject)+'&body='+enc(cur.body);
+      document.getElementById('optCopy').textContent='Copy the email';
+      dlg.showModal();
+    });
+  });
+  document.getElementById('optCopy').addEventListener('click',async ev=>{
+    const t='To: '+TO+'\nSubject: '+cur.subject+'\n\n'+cur.body;
+    try{await navigator.clipboard.writeText(t);ev.target.textContent='Copied! Paste it into any email';}
+    catch(_){ev.target.textContent='Copy failed: write to '+TO;}
+  });
+  document.getElementById('mailClose').addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+})();
 </script>
 </body>
 </html>
