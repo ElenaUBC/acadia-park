@@ -101,6 +101,8 @@ dialog.mail::backdrop{background:rgba(6,25,19,.7)}
 .mail .opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .mail .small{margin:0;font-size:.85rem;color:#6b665c;text-align:center}
 .mail .close{background:none;border:0;font:700 .95rem var(--body);color:#6b665c;cursor:pointer;justify-self:center;padding:6px 12px}
+.tag.loc{display:flex;align-items:center;gap:10px;font-size:clamp(1.15rem,3vw,1.6rem)}
+.tag.loc svg{width:1.1em;height:1.1em;fill:var(--gold);flex:none}
 /* faq */
 details{border-top:1px solid rgba(255,246,229,.18);padding-block:14px}
 details:last-of-type{border-bottom:1px solid rgba(255,246,229,.18)}
@@ -123,21 +125,19 @@ footer img{height:64px;width:auto;display:block}
   <div class="wrap">
     <p class="kicker">Acadia Park</p>
     <h1>Holiday<br>Winter Gallery</h1>
-    <p class="tag">Art · Opening show · Pizza · Music · Card-making</p>
+    <p class="tag loc"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Acadia Highrise Social Space</p>
     <p class="intro">Celebrate the end of the term, the end of the year and the start of a beautiful winter season with your neighbours. Explore art made by Acadia Park residents of all ages, enjoy pizza, snacks and non-alcoholic drinks, and make a holiday card to take home.</p>
 
     <div class="dates">
       <div class="date"><i>Tuesday</i><b>Dec 22</b><span>6 – 8 pm</span><a href="winter-gallery-dec-22.ics">Add to calendar</a></div>
       <div class="date"><i>Wednesday</i><b>Dec 23</b><span>5 – 7 pm</span><a href="winter-gallery-dec-23.ics">Add to calendar</a></div>
     </div>
-    <p class="where"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Acadia Highrise Social Space</p>
 
     <div class="cta">
       <a class="btn primary" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20volunteer%20sign-up&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20volunteer%20at%20the%20Winter%20Gallery.%0D%0A%0D%0AWhen%20I%20can%20help%3A%20%0D%0AWhat%20I%20would%20like%20to%20help%20with%3A%20">Volunteer</a>
       <a class="btn ghost" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20art%20submission&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20submit%20artwork%20for%20the%20Winter%20Gallery.%0D%0A%0D%0ATitle%3A%20%0D%0AArtist%20name%20and%20age%3A%20%0D%0AType%20of%20art%3A%20%0D%0ANeeds%20wall%20or%20table%20space%3A%20%0D%0A%0D%0AI%20have%20attached%20a%20photo%20of%20my%20piece.">Submit art</a>
       <a class="btn ghost" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20performance%20sign-up&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20perform%20in%20the%20Winter%20Gallery%20opening%20show.%0D%0A%0D%0AMy%20name%20or%20group%20name%3A%20%0D%0AType%20of%20performance%3A%20%0D%0AHow%20long%20it%20is%3A%20%0D%0ACan%20I%20come%20to%20the%20rehearsal%20on%20Wed%2C%20Dec%209%2C%206%20-%207%20pm%20%28yes%20/%20no%29%3A%20">Sign up to perform</a>
     </div>
-    <p class="note">Each button helps you send a ready-to-go email to <span class="sel">e.kolmogorov@ubc.ca</span>.</p>
   </div>
 </header>
 
