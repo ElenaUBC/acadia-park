@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Acadia Park Community Events</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@500;700;800&display=swap">
+<style>
+:root{--pine:#0F3D2E;--cream:#FFF6E5;--gold:#E9B949;--ink:#1d1a24;--tint:#FCEFD0;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;--body:"Figtree",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pine);color:var(--cream);font:500 18px/1.5 var(--body);min-height:100vh;display:flex;flex-direction:column}
+.wrap{max-width:860px;margin:0 auto;padding:56px max(18px,4vw);flex:1;width:100%}
+.kicker{color:var(--gold);font:800 1.3rem/1 var(--display);margin:0 0 8px}
+h1{font:800 clamp(2.6rem,9vw,4.6rem)/.92 var(--display);letter-spacing:-.03em;margin:0 0 28px}
+.event{display:block;background:var(--cream);color:var(--ink);text-decoration:none;border-radius:22px;padding:24px;transition:transform .15s}
+.event:hover{transform:translateY(-3px)}
+.event:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.event i{font:800 .8rem/1 var(--body);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#C8323C}
+.event b{display:block;font:800 2rem/1.05 var(--display);margin:8px 0 6px}
+.event span{color:#43403a}
+footer{background:var(--cream);color:var(--ink)}
+footer .in{max-width:860px;margin:0 auto;padding:22px max(18px,4vw);display:flex;justify-content:space-between;align-items:center;gap:16px}
+footer img{height:56px}
+@media (prefers-reduced-motion:reduce){.event{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="kicker">Acadia Park · Residence Life</p>
+  <h1>Community Events</h1>
+  <a class="event" href="winter-gallery/"><i>Dec 22 &amp; 23</i><b>Holiday Winter Gallery</b><span>Resident art, an opening show, pizza, music and card-making at the Acadia Highrise Social Space.</span></a>
+</main>
+<footer><div class="in"><p style="margin:0">Questions?<br><b>e.kolmogorov@ubc.ca</b></p><img src="residence-life-logo.webp" alt="Residence Life"></div></footer>
+</body>
+</html>

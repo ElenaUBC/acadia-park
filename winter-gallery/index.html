@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Holiday Winter Gallery · Acadia Park</title>
+<meta name="description" content="Acadia Park's Holiday Winter Gallery: resident art, an opening show, pizza, music and card-making. December 22 and 23 at the Acadia Highrise Social Space.">
+<meta property="og:title" content="Holiday Winter Gallery · Acadia Park">
+<meta property="og:description" content="Art, an opening show, pizza, music and card-making. Dec 22 and 23, Acadia Highrise Social Space.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: festive evergreen night (matches the poster) — lights across the top, cream cards for details, one column on phones */
+:root{
+  --pine:#0F3D2E; --pine-deep:#0A2A20; --cream:#FFF6E5; --gold:#E9B949; --berry:#C8323C; --ink:#1d1a24; --tint:#FCEFD0;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pine);color:var(--cream);font:500 18px/1.55 var(--body);
+  padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+a{color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding-inline:max(18px,4vw)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1;margin:0;text-wrap:balance}
+
+/* lights */
+.lights{display:block;width:100%;height:clamp(70px,10vw,120px)}
+.bulb{animation:twinkle 3.2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.55}}
+@media (prefers-reduced-motion:reduce){.bulb{animation:none}html{scroll-behavior:auto}}
+
+/* hero */
+.hero{padding-block:8px 56px}
+.kicker{font:800 clamp(1.4rem,4vw,2.2rem)/1 var(--display);color:var(--gold);margin:0 0 6px}
+.hero h1{font-size:clamp(3.6rem,13vw,8.5rem);line-height:.88}
+.tag{font:800 clamp(1.05rem,2.6vw,1.4rem)/1.3 var(--body);color:var(--gold);margin:18px 0 0;letter-spacing:.02em}
+.intro{max-width:60ch;margin:18px 0 0;font-size:1.1rem;color:var(--cream)}
+.dates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:30px;max-width:640px}
+.date{background:var(--tint);color:var(--ink);border-radius:22px;padding:18px 16px;text-align:center}
+.date i{display:block;font:800 .8rem/1 var(--body);font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--berry)}
+.date b{display:block;font:800 clamp(2rem,6vw,3rem)/1.05 var(--display);margin:6px 0 2px}
+.date span{display:block;font-weight:800;font-size:1.2rem}
+.date a{display:inline-block;margin-top:8px;font-size:.85rem;font-weight:700;color:var(--berry)}
+.where{display:flex;align-items:center;gap:10px;margin-top:18px;font-weight:700;font-size:1.1rem}
+.where svg{width:22px;height:22px;fill:var(--gold);flex:none}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:12px 26px;border-radius:999px;
+  font:800 1.05rem/1 var(--body);text-decoration:none;border:2px solid var(--gold);transition:transform .15s}
+.btn.primary{background:var(--gold);color:var(--pine-deep)}
+.btn.ghost{color:var(--gold)}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+
+/* sections */
+section{padding-block:56px}
+section h2{font-size:clamp(2rem,6vw,3.2rem);margin-bottom:22px}
+.band{background:var(--pine-deep)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px}
+.item{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:18px;background:rgba(255,246,229,.06);border:1px solid rgba(255,246,229,.14);min-width:0}
+.item svg{width:44px;height:44px;flex:none}
+.item h3{font-size:1.25rem;margin:2px 0 4px}
+.item p{margin:0;font-size:.98rem;color:#E9E0CC}
+
+/* get involved */
+.ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px}
+.way{background:var(--cream);color:var(--ink);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.way h3{font-size:1.45rem}
+.way p{margin:0;color:#43403a;font-size:.98rem}
+.way ul{margin:0;padding-left:1.1em;color:#43403a;font-size:.95rem}
+.way .btn{margin-top:auto;align-self:flex-start;border-color:var(--pine)}
+.way .btn.primary{background:var(--pine);color:var(--cream)}
+.way .btn.ghost{color:var(--pine)}
+.badge{align-self:flex-start;font:800 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;background:var(--tint);color:var(--berry);padding:7px 10px;border-radius:999px}
+.mail{font-size:.85rem;color:#6b665c;margin:0}
+.mail code{font:600 .85rem var(--body);user-select:all}
+
+/* prep sessions */
+.prep{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px}
+.prep div{border:2px solid var(--gold);border-radius:20px;padding:18px}
+.prep i{font:800 .78rem/1 var(--body);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.prep b{display:block;font:800 1.7rem/1.1 var(--display);margin:6px 0 4px}
+.prep span{display:block;font-weight:600}
+
+.item{flex-direction:row}
+.item .body{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.btn.small{min-height:42px;padding:9px 18px;font-size:.92rem;margin-top:10px;align-self:flex-start;color:var(--gold);border-color:var(--gold)}
+.btn.small:hover{background:var(--gold);color:var(--pine-deep)}
+.note{margin:12px 0 0;font-size:.9rem;color:#E9E0CC}
+.sel{user-select:all;font-weight:700}
+.ways{grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
+/* faq */
+details{border-top:1px solid rgba(255,246,229,.18);padding-block:14px}
+details:last-of-type{border-bottom:1px solid rgba(255,246,229,.18)}
+summary{cursor:pointer;font-weight:800;font-size:1.1rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--gold);font-size:1.4rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;max-width:62ch;color:#E9E0CC}
+
+footer{background:var(--cream);color:var(--ink);padding-block:26px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer p{margin:0;font-size:.95rem}
+footer img{height:64px;width:auto;display:block}
+</style>
+</head>
+<body>
+
+<svg class="lights" viewBox="0 0 1000 120" aria-hidden="true" id="lights"></svg>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Acadia Park</p>
+    <h1>Holiday<br>Winter Gallery</h1>
+    <p class="tag">Art · Opening show · Pizza · Music · Card-making</p>
+    <p class="intro">Celebrate the end of the term, the end of the year and the start of a beautiful winter season with your neighbours. Explore art made by Acadia Park residents of all ages, enjoy pizza, snacks and non-alcoholic drinks, and make a holiday card to take home.</p>
+
+    <div class="dates">
+      <div class="date"><i>Tuesday</i><b>Dec 22</b><span>6 – 8 pm</span><a href="winter-gallery-dec-22.ics">Add to calendar</a></div>
+      <div class="date"><i>Wednesday</i><b>Dec 23</b><span>5 – 7 pm</span><a href="winter-gallery-dec-23.ics">Add to calendar</a></div>
+    </div>
+    <p class="where"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Acadia Highrise Social Space</p>
+
+    <div class="cta">
+      <a class="btn primary" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20art%20submission&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20submit%20artwork%20for%20the%20Winter%20Gallery.%0D%0A%0D%0ATitle%3A%20%0D%0AArtist%20name%20and%20age%3A%20%0D%0AType%20of%20art%3A%20%0D%0ANeeds%20wall%20or%20table%20space%3A%20%0D%0A%0D%0AI%20have%20attached%20a%20photo%20of%20my%20piece.">Submit art</a>
+      <a class="btn ghost" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20performance%20sign-up&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20perform%20in%20the%20Winter%20Gallery%20opening%20show.%0D%0A%0D%0AMy%20name%20or%20group%20name%3A%20%0D%0AType%20of%20performance%3A%20%0D%0AHow%20long%20it%20is%3A%20%0D%0AWhat%20I%20need%20%28microphone%2C%20speaker%2C%20chair...%29%3A%20">Sign up to perform</a>
+      <a class="btn ghost" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20volunteer%20sign-up&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20volunteer%20at%20the%20Winter%20Gallery.%0D%0A%0D%0AWhen%20I%20can%20help%3A%20%0D%0AWhat%20I%20would%20like%20to%20help%20with%3A%20">Volunteer</a>
+    </div>
+    <p class="note">Each button opens a ready-to-send email to <span class="sel">e.kolmogorov@ubc.ca</span>.</p>
+  </div>
+</header>
+
+<section class="band" id="prep">
+  <div class="wrap">
+    <h2>Get ready for the Gallery</h2>
+    <div class="prep">
+      <div><i>Show Rehearsal</i><b>Wed, Dec 9 · 6 – 7 pm</b><span>Acadia Highrise Social Space</span></div>
+      <div><i>Winter-Themed Art</i><b>Fri, Dec 11 · 5:30 – 6:30 pm</b><span>Commonsblock Activity Room</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="expect">
+  <div class="wrap">
+    <h2>What to expect</h2>
+    <div class="grid">
+      <div class="item"><svg viewBox="0 0 44 44"><rect x="4" y="6" width="36" height="30" rx="3" fill="#E9B949"/><rect x="9" y="11" width="26" height="20" fill="#FFF6E5"/><path d="M9 31l9-11 6 6 5-5 6 10z" fill="#2F6FD0"/></svg>
+        <div class="body"><h3>Resident art</h3><p>Paintings, photography, clay, nature art and more by neighbours of all ages. Any medium, any age: email a photo of your piece, its title and the artist's name.</p><a class="btn small" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20art%20submission&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20submit%20artwork%20for%20the%20Winter%20Gallery.%0D%0A%0D%0ATitle%3A%20%0D%0AArtist%20name%20and%20age%3A%20%0D%0AType%20of%20art%3A%20%0D%0ANeeds%20wall%20or%20table%20space%3A%20%0D%0A%0D%0AI%20have%20attached%20a%20photo%20of%20my%20piece.">Submit your piece</a></div></div>
+      <div class="item"><svg viewBox="0 0 44 44"><rect x="14" y="4" width="16" height="20" rx="8" fill="#E9B949"/><path d="M19 24h6l-1.5 16h-3z" fill="#FFF6E5"/><path d="M8 18a14 14 0 0 0 28 0" stroke="#FFF6E5" stroke-width="2.5" fill="none"/></svg>
+        <div class="body"><h3>Opening show</h3><p>Sing, play, dance, read a poem or share a talent, solo or with a group.</p><a class="btn small" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20performance%20sign-up&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20perform%20in%20the%20Winter%20Gallery%20opening%20show.%0D%0A%0D%0AMy%20name%20or%20group%20name%3A%20%0D%0AType%20of%20performance%3A%20%0D%0AHow%20long%20it%20is%3A%20%0D%0AWhat%20I%20need%20%28microphone%2C%20speaker%2C%20chair...%29%3A%20">Sign up to perform</a></div></div>
+      <div class="item"><svg viewBox="0 0 44 44"><path d="M22 4L4 38h36z" fill="#E9B949"/><path d="M22 4L8 31h28z" fill="#C8323C"/><g fill="#FFF6E5"><circle cx="18" cy="24" r="3"/><circle cx="26" cy="20" r="3"/><circle cx="24" cy="29" r="3"/></g></svg>
+        <div class="body"><h3>Pizza and snacks</h3><p>Plus non-alcoholic drinks. Let us know about dietary needs and allergies.</p><a class="btn small" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20dietary%20needs&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20share%20dietary%20needs%20for%20the%20Winter%20Gallery%20pizza.%0D%0A%0D%0ANumber%20of%20people%3A%20%0D%0ADietary%20needs%20or%20allergies%3A%20">Share dietary needs</a></div></div>
+      <div class="item"><svg viewBox="0 0 44 44"><path d="M16 32V8l20-4v24" stroke="#E9B949" stroke-width="3" fill="none"/><circle cx="12" cy="32" r="5" fill="#E9B949"/><circle cx="32" cy="28" r="5" fill="#E9B949"/></svg>
+        <div class="body"><h3>Music</h3><p>A festive playlist with songs requested by residents. Family-friendly, please.</p><a class="btn small" href="mailto:e.kolmogorov@ubc.ca?subject=Winter%20Gallery%3A%20song%20request&amp;body=Hi%20Elena%2C%0D%0A%0D%0AI%20would%20like%20to%20request%20a%20song%20for%20the%20Winter%20Gallery%20playlist.%0D%0A%0D%0ASong%3A%20%0D%0AArtist%3A%20">Request a song</a></div></div>
+      <div class="item"><svg viewBox="0 0 44 44"><path d="M6 10h32v26H6z" fill="#FFF6E5"/><path d="M6 10l16 13 16-13" stroke="#C8323C" stroke-width="2.5" fill="none"/><path d="M33 4l1.5 3.5L38 9l-3.5 1.5L33 14l-1.5-3.5L28 9l3.5-1.5z" fill="#E9B949"/></svg>
+        <div class="body"><h3>Card-making</h3><p>Make a holiday card for someone special. Supplies provided.</p></div></div>
+      <div class="item"><svg viewBox="0 0 44 44"><path d="M10 14h20v18a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8z" fill="#FFF6E5"/><path d="M30 18h3a5 5 0 0 1 0 10h-3" stroke="#FFF6E5" stroke-width="3" fill="none"/><path d="M16 4c-3 4 3 5 0 9M23 4c-3 4 3 5 0 9" stroke="#E9B949" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        <div class="body"><h3>Bring your own mug</h3><p>For hot drinks. It keeps the night waste-free.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq">
+  <div class="wrap">
+    <h2>Good to know</h2>
+    <details><summary>Who can come?</summary><p>Acadia Park residents, their families and guests.</p></details>
+    <details><summary>Do I have to come both evenings?</summary><p>No. Come to either evening, or both!</p></details>
+    <details><summary>Is there a cost?</summary><p>No, the Gallery is free.</p></details>
+    <details><summary>When can I drop off my artwork?</summary><p>We'll email everyone who submits art with drop-off and pick-up times.</p></details>
+    <details><summary>Accessibility</summary><p>If you need anything to take part comfortably, email <span style="user-select:all">e.kolmogorov@ubc.ca</span>.</p></details>
+    <details><summary>Photos</summary><p>We won't be taking photos at the event. If you take your own, please be mindful of others: some neighbours may prefer not to be photographed, so ask before including people in your pictures.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Questions?<br><b>e.kolmogorov@ubc.ca</b></p>
+    <img src="residence-life-logo.webp" alt="Residence Life">
+  </div>
+</footer>
+
+<script>
+/* string lights, redrawn to the screen width so bulbs never stretch */
+function drawLights(){
+  const svg = document.getElementById("lights"), cols = ["#FF5A5F","#E9B949","#7FD3FF","#FFFFFF","#7EE08A"];
+  const W = Math.max(400, Math.round(svg.clientWidth * 120 / Math.max(1, svg.clientHeight)));
+  svg.setAttribute("viewBox", `0 0 ${W} 120`);
+  let s = `<path d="M0 18Q${W / 2} 150 ${W} 18" stroke="#0A2A20" stroke-width="3" fill="none"/>`;
+  const n = Math.max(9, Math.round(W / 55));
+  for (let i = 0; i < n; i++) {
+    const t = i / (n - 1), x = t * W, y = (1 - t) * (1 - t) * 18 + 2 * (1 - t) * t * 150 + t * t * 18;
+    const c = cols[i % cols.length];
+    s += `<g class="bulb" style="animation-delay:${(i % 5) * 0.6}s"><circle cx="${x}" cy="${y + 18}" r="16" fill="${c}" opacity=".25"/><rect x="${x - 4}" y="${y}" width="8" height="7" fill="#0A2A20"/><ellipse cx="${x}" cy="${y + 18}" rx="7" ry="10" fill="${c}"/></g>`;
+  }
+  svg.innerHTML = s;
+}
+drawLights();
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawLights, 150); });
+</script>
+</body>
+</html>

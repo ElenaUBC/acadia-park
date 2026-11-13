@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Acadia Park Residence Life//Winter Gallery//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:winter-gallery-dec-23@acadia-park
+DTSTAMP:20261113T000000Z
+DTSTART:20261224T010000Z
+DTEND:20261224T030000Z
+SUMMARY:Holiday Winter Gallery
+LOCATION:Acadia Highrise Social Space
+DESCRIPTION:Resident art\, opening show\, pizza\, music and card-making. Bring your own mug for hot drinks. Questions: e.kolmogorov@ubc.ca
+END:VEVENT
+END:VCALENDAR
