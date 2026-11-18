@@ -13,6 +13,7 @@ body{margin:0;background:var(--pine);color:var(--cream);font:500 18px/1.5 var(--
 .wrap{max-width:860px;margin:0 auto;padding:56px max(18px,4vw);flex:1;width:100%}
 .kicker{color:var(--gold);font:800 1.3rem/1 var(--display);margin:0 0 8px}
 h1{font:800 clamp(2.6rem,9vw,4.6rem)/.92 var(--display);letter-spacing:-.03em;margin:0 0 28px}
+.event + .event{margin-top:14px}
 .event{display:block;background:var(--cream);color:var(--ink);text-decoration:none;border-radius:22px;padding:24px;transition:transform .15s}
 .event:hover{transform:translateY(-3px)}
 .event:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
@@ -29,6 +30,7 @@ footer img{height:56px}
 <main class="wrap">
   <p class="kicker">Acadia Park · Residence Life</p>
   <h1>Community Events</h1>
+  <a class="event" href="movie-night/"><i>First Saturday of the month</i><b>Movie Night</b><span>Adult &amp; teen movie nights, 6 – 9 pm at the Acadia Highrise Social Space. See what's playing and vote for upcoming movies.</span></a>
   <a class="event" href="winter-gallery/"><i>Dec 22 &amp; 23</i><b>Holiday Winter Gallery</b><span>Resident art, an opening show, pizza, music and card-making at the Acadia Highrise Social Space.</span></a>
 </main>
 <footer><div class="in"><p style="margin:0">Questions?<br><b>e.kolmogorov@ubc.ca</b></p><img src="residence-life-logo.webp" alt="Residence Life"></div></footer>

@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Acadia Park Movie Night</title>
+<meta name="description" content="Adult & Teen Movie Night at Acadia Park: first Saturday of the month, 6 – 9 pm, Acadia Highrise Social Space. See what's playing and vote for the next movie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: a night-sky cinema page (matches the Movie Night poster): hero, featured film, vote grid, season schedule */
+:root{
+  --night:#1F2557; --night-deep:#151A40; --card:#262D66; --gold:#FFC94A; --cream:#FFF6E5; --ink:#16182b; --muted:#C9CCE8; --red:#E94B4B;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--cream);font:500 18px/1.55 var(--body);
+  padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:max(18px,4vw)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1;margin:0;text-wrap:balance}
+section{padding-block:56px}
+section h2{font-size:clamp(2rem,6vw,3.2rem);margin-bottom:10px}
+.lede{margin:0 0 26px;color:var(--muted);max-width:62ch}
+.band{background:var(--night-deep)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:64px 48px}
+.stars{position:absolute;inset:0;pointer-events:none;opacity:.9}
+.hero .wrap{position:relative}
+.kicker{font:800 clamp(1.1rem,3vw,1.5rem)/1 var(--display);color:var(--gold);margin:0 0 10px}
+.hero h1{font-size:clamp(3.4rem,12vw,7.5rem);line-height:.9}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.fact{display:inline-flex;align-items:center;gap:8px;background:rgba(255,246,229,.08);border:1px solid rgba(255,246,229,.18);border-radius:999px;padding:9px 16px;font-weight:700;font-size:1rem}
+.fact svg{width:18px;height:18px;fill:var(--gold);flex:none}
+.pop{position:absolute;right:max(18px,6vw);top:150px;width:clamp(80px,15vw,180px);height:auto}
+@media (max-width:600px){.pop{top:40px}}
+.aud{display:inline-flex;align-items:center;gap:16px;margin:20px 0 0;background:var(--gold);color:var(--ink);
+  font:800 clamp(1.15rem,3.6vw,1.7rem)/1 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:14px 30px;
+  -webkit-mask:radial-gradient(circle 11px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle 11px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.aud .admit{font:800 .55em/1 var(--body);letter-spacing:.2em}
+.aud .perf{align-self:stretch;border-left:3px dashed rgba(22,24,43,.45);margin-block:-6px}
+.notes{margin:22px 0 0;color:var(--muted);font-size:1rem;max-width:62ch}
+
+/* film card */
+.film{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0;background:var(--card);border-radius:24px;overflow:hidden;border:1px solid rgba(255,246,229,.12)}
+.still{position:relative;aspect-ratio:16/9;max-width:100%;background:linear-gradient(135deg,#3B44A8,#151A40);display:grid;place-items:center;overflow:hidden}
+.still img{width:100%;height:100%;object-fit:cover;display:block}
+button.still{border:0;padding:0;width:100%;cursor:pointer;color:inherit;font:inherit}
+.still iframe{width:100%;height:100%;border:0;display:block}
+.playbtn{position:absolute;inset:0;margin:auto;width:68px;height:68px;border-radius:50%;background:rgba(21,26,64,.72);display:grid;place-items:center;transition:transform .15s,background .15s}
+.playbtn svg{width:30px;height:30px;fill:var(--gold);margin-left:4px}
+button.still:hover .playbtn,button.still:focus-visible .playbtn{transform:scale(1.08);background:rgba(21,26,64,.9)}
+button.still:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+.still .ph{font:800 clamp(1.4rem,4vw,2.4rem)/1 var(--display);text-align:center;padding:20px;color:rgba(255,246,229,.85)}
+.still .ph small{display:block;font:600 .8rem/1.3 var(--body);color:var(--muted);margin-top:10px;letter-spacing:.04em}
+.film .body{padding:24px 26px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.date{display:inline-flex;align-self:flex-start;gap:8px;align-items:baseline;background:var(--gold);color:var(--ink);border-radius:12px;padding:6px 12px;font-weight:800}
+.date small{font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.film h3{font-size:clamp(1.8rem,4vw,2.6rem)}
+.meta{margin:0;color:var(--muted);font-size:.95rem}
+.blurb{margin:0}
+.warn{margin:0;font-size:.92rem;color:#FFD9A8}
+.ratings{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0}
+.ratings .rate{white-space:nowrap}
+.rate{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;background:rgba(255,246,229,.08);border:1px solid rgba(255,246,229,.16);text-decoration:none;font-size:.92rem;font-weight:700;font-variant-numeric:tabular-nums}
+.rate b{font-family:var(--display);font-size:1.1rem}
+.rate i{font-style:normal;font-size:.82rem;color:var(--muted)}
+.rate:hover{border-color:var(--gold)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;border-radius:999px;font:800 .98rem/1 var(--body);text-decoration:none;border:2px solid var(--gold);color:var(--gold);background:transparent;cursor:pointer}
+.btn.primary{background:var(--gold);color:var(--ink)}
+.btn:focus-visible,.rate:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+.btn svg{width:16px;height:16px;fill:currentColor}
+
+/* vote grid */
+.votes{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:16px}
+.vote{background:var(--card);border-radius:20px;overflow:hidden;border:1px solid rgba(255,246,229,.12);display:flex;flex-direction:column}
+.vote .still{aspect-ratio:16/9}
+.vote .body{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.vote h3{font-size:1.5rem}
+.vote .blurb{font-size:.95rem}
+.vote .actions{margin-top:auto}
+.vhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:22px}
+.vhead .date{font-size:1rem}
+
+/* season */
+.season{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.season{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.season{grid-template-columns:1fr}}
+.slot{display:block;text-decoration:none;border:2px solid rgba(255,201,74,.55);border-radius:18px;padding:16px}
+.slot:hover{border-color:var(--gold)}
+.slot:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+.slot i{font:800 .78rem/1 var(--body);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.slot b{display:block;font:800 1.5rem/1.1 var(--display);margin:6px 0 4px}
+.slot span{display:block;color:var(--muted);font-size:.95rem}
+.slot.on{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.slot.on i,.slot.on span{color:var(--ink)}
+
+.moods{list-style:none;margin:2px 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.moods li{display:inline-flex;align-items:center;gap:5px;font-size:.82rem;font-weight:700;color:var(--muted);background:rgba(255,246,229,.06);border-radius:999px;padding:4px 10px 4px 7px}
+.moods li span{font-size:1.05rem;line-height:1}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.legend b{font-family:var(--display);font-size:1.2rem;margin-right:4px}
+.adv{margin:0;font-size:.85rem;color:var(--muted);line-height:1.4}
+.adv b{color:var(--cream);font-weight:800}
+.tl{margin:0;font-weight:800;font-size:.9rem;color:var(--gold)}
+.fine{font-size:.85rem;color:var(--muted);margin-top:18px}
+.vbtn{font:800 .98rem/1 var(--body)}
+.vbtn:disabled{cursor:default}
+.vbtn:disabled:not(.done){opacity:.45}
+.vbtn.done{background:#7EE08A;border-color:#7EE08A;color:var(--ink);opacity:1}
+.tally{display:grid;gap:5px}
+.tally .bar{height:10px;border-radius:999px;background:rgba(255,246,229,.12);overflow:hidden}
+.tally .bar span{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s ease}
+.tally p{margin:0;font-size:.85rem;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.tally .bar span{transition:none}}
+
+
+footer{background:var(--cream);color:var(--ink);padding-block:24px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer p{margin:0;font-size:.95rem}
+footer img{height:60px;width:auto;display:block}
+
+@media (max-width:760px){.film{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="stars" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle cx="840" cy="110" r="62" fill="#FFC94A"/><circle cx="872" cy="92" r="56" fill="#1F2557"/>
+    <g fill="#FFC94A"><path d="M700 70l6 14 14 6-14 6-6 14-6-14-14-6 14-6z"/><path d="M930 250l5 11 11 5-11 5-5 11-5-11-11-5 11-5z"/><path d="M760 230l4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/></g>
+    <g fill="#fff" opacity=".55"><circle cx="620" cy="160" r="2.5"/><circle cx="980" cy="60" r="2.5"/><circle cx="660" cy="300" r="2"/><circle cx="560" cy="60" r="2"/><circle cx="900" cy="340" r="2.5"/></g>
+  </svg>
+  <svg class="pop" viewBox="-10 -20 220 270" aria-hidden="true">
+    <g>
+      <defs><clipPath id="bk"><path d="M10 80h180l-22 150H32z"/></clipPath></defs>
+      <g fill="#FFF4D6" stroke="#E8C77A" stroke-width="3"><circle cx="40" cy="70" r="26"/><circle cx="160" cy="70" r="26"/><circle cx="72" cy="48" r="28"/><circle cx="128" cy="48" r="28"/><circle cx="100" cy="30" r="30"/><circle cx="100" cy="72" r="26"/><circle cx="58" cy="20" r="18"/><circle cx="148" cy="22" r="18"/></g>
+      <g clip-path="url(#bk)"><rect x="0" y="80" width="200" height="160" fill="#fff"/><g fill="#E94B4B"><rect x="10" y="80" width="30" height="160"/><rect x="70" y="80" width="30" height="160"/><rect x="130" y="80" width="30" height="160"/><rect x="190" y="80" width="30" height="160"/></g></g>
+      <path d="M4 74h192v14H4z" fill="#E94B4B"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <p class="kicker">Acadia Park</p>
+    <h1>Movie<br>Night</h1>
+    <p class="aud" aria-label="For adults and teens"><span class="admit">Admit</span><span class="perf" aria-hidden="true"></span><span>Adults &amp; Teens</span></p>
+    <div class="facts">
+      <span class="fact"><svg viewBox="0 0 24 24"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2zm-2 8h14v10H5z"/></svg>First Saturday of the month</span>
+      <span class="fact"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm-1 3v6l5 3 1-1.6-4-2.4V7z"/></svg>6 – 9 pm</span>
+      <span class="fact"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Acadia Highrise Social Space</span>
+    </div>
+    <p class="notes">Popcorn provided! Feel free to bring your dinner, and a mug for drinks. Parental guidance is strongly recommended for teens.</p>
+  </div>
+</header>
+
+<section class="band" id="season">
+  <div class="wrap">
+    <h2>This season</h2>
+    <p class="lede">Every first Saturday, 6 – 9 pm. Tap a month to jump to it.</p>
+    <div class="season" id="seasonList"></div>
+  </div>
+</section>
+
+<div id="months"></div>
+
+<section>
+  <div class="wrap">
+    <div class="legend"><b>What to expect</b><ul class="moods" id="legend"></ul></div>
+    <p class="fine">Rotten Tomatoes shows the higher of its critics and audience scores. Ratings may change over time; tap a rating to see the full page. Age ratings are the U.S. MPA ratings with their official reasons; suggested ages are our guide. Tap a picture to play the official trailer.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Questions?<br><b>e.kolmogorov@ubc.ca</b></p>
+    <img src="../residence-life-logo.webp" alt="Residence Life">
+  </div>
+</footer>
+
+
+<script>
+/* ===== Edit the movies here =====
+   image: leave "" for a title card, or put a file name (e.g. "img/holdovers.jpg") once you have a picture.
+   rt: Rotten Tomatoes score (the higher of critics and audience). imdb: IMDb user score out of 10. */
+
+/* ===== Voting (Google Form) =====
+   formId:   the long code from your form's pre-filled link (between /d/e/ and /viewform)
+   fields:   each month's question code from the pre-filled link (entry.123456789)
+   resultsCsv: optional "Publish to web" CSV link of the responses sheet, to show live counts
+   Answers in the form must match the film titles below exactly. */
+const VOTING = {
+  formId: "1FAIpQLSebmPpUCrvaVGx6MxrpXSoHMMxq2HCH6DHpsZvGGwesYpRRVQ",
+  fields: { jan: "entry.1215719774", mar: "entry.964488902", apr: "entry.672642918", may: "entry.1797876935" },
+  resultsCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT8Xxfd6BwaR0IDxC4t8mL-I34_L__AeadIes6bcss0vXl_W4HtUrc4tRbW72KH5RO4h-SLupzRh1sQ/pub?gid=572921237&single=true&output=csv"
+};
+
+const FILMS = {
+  lastChristmas: { title: "Last Christmas", age: "13+", why: "language and sexual references", yt: "z9CEIcmWmtA", year: 2019, mpa: "PG-13", runtime: "1 h 43", rt: "81%", imdb: "6.5", moods: ["laugh","romance","sad"],
+    blurb: "A Christmas romance in London set to George Michael songs, with a twist people love to talk about.",
+    cast: "Emilia Clarke, Henry Golding, Michelle Yeoh, Emma Thompson" },
+  holdovers: { title: "The Holdovers", age: "16+", why: "language, some drug use and brief sexual material", yt: "AhKLpJmHhIg", year: 2023, mpa: "R", runtime: "2 h 13", rt: "97%", imdb: "7.9", moods: ["laugh","sad","swear"],
+    blurb: "A grumpy teacher, a troubled student and the school cook spend Christmas and New Year's together at an empty boarding school.",
+    cast: "Paul Giamatti, Da'Vine Joy Randolph, Dominic Sessa" },
+  naughtyNine: { title: "The Naughty Nine", age: "8+", why: "rude humour and mild action", yt: "LE4M6xQhBFA", year: 2023, mpa: "PG", runtime: "1 h 30", rt: "75%", imdb: "5.3", moods: ["laugh"],
+    blurb: "Nine kids on the naughty list plan a heist on Santa's workshop to get their presents back. Silly holiday fun.",
+    cast: "Winslow Fegley, Danny Glover, Camille Guaty, Derek Theler" },
+  eeaao: { title: "Everything Everywhere All at Once", age: "16+", why: "some violence, sexual material and language", yt: "wxN1T1uxQ2g", year: 2022, mpa: "R", runtime: "2 h 19", rt: "93%", imdb: "7.8", moods: ["laugh","sad","swear","fight"],
+    blurb: "A laundromat owner, buried in a tax audit and family tension, discovers she can jump between universes. A wild, funny and moving story about a mother and daughter, as the family prepares for a Lunar New Year party.",
+    cast: "Michelle Yeoh, Ke Huy Quan, Stephanie Hsu, Jamie Lee Curtis",
+    awards: "7 Oscars, including Best Picture and Best Actress",
+    note: "Rated R (language, fight scenes, crude humour). Best for adults and older teens." },
+  coda: { title: "CODA", age: "13+", why: "strong sexual content, language and drug use", yt: "0pmfrE1YL4I", year: 2021, mpa: "PG-13", runtime: "1 h 51", rt: "94%", imdb: "8.0", moods: ["laugh","sad","music","swear"],
+    blurb: "The only hearing member of a Deaf family must choose between the family business and her dream of singing.",
+    cast: "Emilia Jones, Marlee Matlin, Troy Kotsur, Eugenio Derbez" },
+  turningRed: { title: "Turning Red", age: "8+", why: "thematic material, suggestive content and language", yt: "XdKzUbAiswE", year: 2022, mpa: "PG", runtime: "1 h 40", rt: "95%", imdb: "7.0", moods: ["laugh","music"],
+    blurb: "A 13-year-old in Toronto turns into a giant red panda whenever she gets too excited. Funny, warm and very Canadian.",
+    cast: "Rosalie Chiang, Sandra Oh, Ava Morse, Maitreyi Ramakrishnan" },
+  farewell: { title: "The Farewell", age: "10+", why: "thematic material, brief language and some smoking", yt: "RofpAjqwMa8", year: 2019, mpa: "PG", runtime: "1 h 40", rt: "97%", imdb: "7.5", moods: ["laugh","sad"],
+    blurb: "A Chinese-American family holds a fake wedding so they can say goodbye to their grandmother without telling her she's ill.",
+    cast: "Awkwafina, Zhao Shu-zhen, Tzi Ma, Diana Lin" },
+  barbie: { title: "Barbie", age: "12+", why: "suggestive references and brief language", yt: "pBk4NYhWNMM", year: 2023, mpa: "PG-13", runtime: "1 h 54", rt: "88%", imdb: "6.8", moods: ["laugh","music"],
+    blurb: "Barbie leaves her perfect pink world for the real one and starts asking big questions. Bright, funny and surprisingly thoughtful.",
+    cast: "Margot Robbie, Ryan Gosling, America Ferrera, Issa Rae" },
+  politeSociety: { title: "Polite Society", age: "13+", why: "violence, strong language and suggestive references", yt: "l0udT7CGo3w", year: 2023, mpa: "PG-13", runtime: "1 h 44", rt: "91%", imdb: "6.5", moods: ["laugh","fight"],
+    blurb: "A would-be stuntwoman in London plots a wild martial-arts heist to save her big sister from a suspicious wedding.",
+    cast: "Priya Kansara, Ritu Arya, Nimra Bucha" },
+  kpop: { title: "KPop Demon Hunters", age: "8+", why: "action, violence, scary images and rude humour", yt: "9H7VVtC81MI", year: 2025, mpa: "PG", runtime: "1 h 40", rt: "99%", imdb: "7.5", moods: ["laugh","music","fight"],
+    blurb: "A K-pop girl group secretly protects the world from demons, and their songs are their weapon. Huge, catchy and colourful.",
+    cast: "Voices of Arden Cho, May Hong, Ji-young Yoo, Ahn Hyo-seop" },
+  westSide: { title: "West Side Story", age: "13+", why: "strong violence, strong language, thematic content and smoking", yt: "A5GJLwWiYSg", year: 2021, mpa: "PG-13", runtime: "2 h 36", rt: "93%", imdb: "7.2", moods: ["music","romance","sad","fight"],
+    blurb: "Spielberg's dazzling musical about young love between rival gangs in 1950s New York.",
+    cast: "Ansel Elgort, Rachel Zegler, Ariana DeBose, Rita Moreno" },
+  dune: { title: "Dune", age: "13+", why: "sequences of strong violence and some disturbing images", yt: "8g18jFHCLXk", year: 2021, mpa: "PG-13", runtime: "2 h 35", rt: "90%", imdb: "8.0", moods: ["fight","sad"],
+    blurb: "A young heir is sent to a dangerous desert planet in an epic sci-fi adventure. Big screen, big sound.",
+    cast: "Timothée Chalamet, Zendaya, Rebecca Ferguson, Oscar Isaac" },
+  sw4: { title: "Star Wars: A New Hope", age: "8+", why: "sci-fi action violence", yt: "vZ734NWnAHA", year: 1977, mpa: "PG", runtime: "2 h 1", rt: "96%", imdb: "8.6", moods: ["laugh","fight"],
+    timeline: "Episode IV · 1st film released · The story begins", blurb: "Where it all began: a farm boy, a princess, a smuggler and a Death Star.", cast: "Mark Hamill, Carrie Fisher, Harrison Ford" },
+  sw5: { title: "The Empire Strikes Back", age: "8+", why: "sci-fi action violence", yt: "JNwNXF9Y6kY", year: 1980, mpa: "PG", runtime: "2 h 4", rt: "97%", imdb: "8.7", moods: ["fight","sad"],
+    timeline: "Episode V · Sequel to A New Hope", blurb: "Many fans' favourite, with Yoda, Hoth and the most famous twist in movie history.", cast: "Mark Hamill, Carrie Fisher, Harrison Ford, Billy Dee Williams" },
+  sw6: { title: "Return of the Jedi", age: "8+", why: "sci-fi action violence", yt: "7L8p7_SLzvU", year: 1983, mpa: "PG", runtime: "2 h 11", rt: "94%", imdb: "8.3", moods: ["laugh","fight"],
+    timeline: "Episode VI · Ending of the original trilogy", blurb: "Ewoks, a speeder-bike chase and the final showdown of the original trilogy.", cast: "Mark Hamill, Carrie Fisher, Harrison Ford, Billy Dee Williams" },
+  sw7: { title: "The Force Awakens", age: "10+", why: "sci-fi action violence", yt: "sGbxmsDFVnE", year: 2015, mpa: "PG-13", runtime: "2 h 18", rt: "93%", imdb: "7.8", moods: ["laugh","fight","sad"],
+    timeline: "Episode VII · About 30 years after Return of the Jedi", blurb: "A scavenger and a runaway stormtrooper are pulled into a new adventure, with Han, Leia and Chewie back too.", cast: "Daisy Ridley, John Boyega, Oscar Isaac, Harrison Ford" },
+  rogueOne: { title: "Rogue One", year: 2016, mpa: "PG-13", runtime: "2 h 13", rt: "87%", imdb: "7.8", moods: ["fight","sad"],
+    blurb: "A band of rebels on a daring mission to steal the Death Star plans. Works on its own, no homework needed.", cast: "Felicity Jones, Diego Luna, Riz Ahmed, Donnie Yen" },
+  sw1: { title: "The Phantom Menace", year: 1999, mpa: "PG", runtime: "2 h 16", rt: "59%", imdb: "6.5", moods: ["laugh","fight"],
+    blurb: "Young Anakin, the pod race and Darth Maul. Critics were cool, but many grew up loving it.", cast: "Liam Neeson, Ewan McGregor, Natalie Portman" }
+};
+
+/* What to expect icons. Edit the list on any film above. */
+const MOODS = {
+  laugh:   { icon: "😂", label: "Funny" },
+  sad:     { icon: "😢", label: "Sad moments" },
+  romance: { icon: "❤️", label: "Romance" },
+  music:   { icon: "🎵", label: "Music & dance" },
+  swear:   { icon: "🤬", label: "Strong language" },
+  fight:   { icon: "⚔️", label: "Action or violence" }
+};
+
+/* Each month: a vote (films: [...]) or a chosen movie (film: "...") */
+const MONTHS = [
+  { key: "jan", date: "2027-01-02", name: "January", theme: "Holiday movies",
+    lede: "Ease into the new year with a cozy holiday film. Check out the options, then cast your vote.",
+    films: ["lastChristmas", "holdovers", "naughtyNine"] },
+  { key: "feb", date: "2027-02-06", name: "February", theme: "Lunar New Year",
+    lede: "Already chosen to celebrate Lunar New Year.", film: "eeaao" },
+  { key: "mar", date: "2027-03-06", name: "March", theme: "International Women's Day",
+    lede: "Celebrating International Women's Day (March 8) with stories led by women and girls.",
+    films: ["coda", "turningRed", "farewell", "barbie"] },
+  { key: "apr", date: "2027-04-03", name: "April", theme: "Action & fantasy",
+    lede: "Big, bold and full of energy. Which adventure should we watch?",
+    films: ["politeSociety", "kpop", "westSide", "dune"] },
+  { key: "may", date: "2027-05-01", name: "May", theme: "May the Force be with you",
+    lede: "May the 4th is Star Wars Day (say it out loud: \"May the Force be with you\"), so we're celebrating a few days early. Pick from the original trilogy (Episodes IV to VI) or the highest-rated newer film, The Force Awakens. Each works on its own.",
+    films: ["sw4", "sw5", "sw6", "sw7"] }
+];
+
+/* ===== Page code (no need to edit below) ===== */
+const fmt = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-CA", { weekday: "short", month: "short", day: "numeric" });
+const q = s => encodeURIComponent(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const play = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+
+function still(f) {
+  if (f.yt) return `<button class="still yt" type="button" data-yt="${esc(f.yt)}" aria-label="Play the ${esc(f.title)} trailer">
+      <img src="https://i.ytimg.com/vi/${esc(f.yt)}/maxresdefault.jpg" alt="Scene from the ${esc(f.title)} trailer" loading="lazy"
+        onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://i.ytimg.com/vi/${esc(f.yt)}/hqdefault.jpg'}">
+      <span class="playbtn" aria-hidden="true">${play}</span></button>`;
+  return f.image
+    ? `<div class="still"><img src="${esc(f.image)}" alt="Scene from ${esc(f.title)}" loading="lazy"></div>`
+    : `<div class="still"><div class="ph">${esc(f.title)}<small>${f.year} · ${esc(f.mpa)} · ${esc(f.runtime)}</small></div></div>`;
+}
+const advisory = f => f.why ? `<p class="adv"><b>Rated ${esc(f.mpa)}</b> for ${esc(f.why)} · <b>Suggested age ${esc(f.age)}</b></p>` : "";
+const moods = f => f.moods && f.moods.length
+  ? `<ul class="moods" aria-label="What to expect">${f.moods.map(k => `<li title="${esc(MOODS[k].label)}"><span aria-hidden="true">${MOODS[k].icon}</span>${esc(MOODS[k].label)}</li>`).join("")}</ul>` : "";
+function ratings(f) {
+  return `<div class="ratings">
+    <a class="rate" href="https://www.rottentomatoes.com/search?search=${q(f.title)}" target="_blank" rel="noopener" title="Rotten Tomatoes (higher of critics and audience)"><b>${esc(f.rt)}</b><i>Rotten Tomatoes</i></a>
+    <a class="rate" href="https://www.imdb.com/find/?q=${q(f.title + " " + f.year)}" target="_blank" rel="noopener" title="IMDb user rating"><b>${esc(f.imdb)}</b><i>IMDb</i></a>
+  </div>`;
+}
+const trailer = f => `<a class="btn" href="${f.yt ? "https://www.youtube.com/watch?v=" + f.yt : "https://www.youtube.com/results?search_query=" + q(f.title + " " + f.year + " official trailer")}" target="_blank" rel="noopener">${play} Trailer</a>`;
+
+function voteCard(f, key) {
+  return `<article class="vote">${still(f)}<div class="body">
+    <h3>${esc(f.title)}</h3><p class="meta">${f.year} · ${esc(f.mpa)} · ${esc(f.runtime)}</p>
+    ${f.timeline ? `<p class="tl">${esc(f.timeline)}</p>` : ""}${ratings(f)}${advisory(f)}${moods(f)}<p class="blurb">${esc(f.blurb)}</p><p class="meta">With ${esc(f.cast)}</p>
+    <div class="tally" data-month="${key}" data-title="${esc(f.title)}" hidden><div class="bar"><span></span></div><p></p></div>
+    <div class="actions"><button class="btn primary vbtn" type="button" data-month="${key}" data-title="${esc(f.title)}">Vote for this movie</button></div></div></article>`;
+}
+function chosen(f, m) {
+  return `<article class="film">${still(f)}<div class="body">
+    <span class="date"><small>${esc(m.theme)}</small> ${fmt(m.date)}</span>
+    <h3>${esc(f.title)}</h3><p class="meta">${f.year} · ${esc(f.mpa)} · ${esc(f.runtime)}${f.awards ? " · " + esc(f.awards) : ""}</p>
+    ${ratings(f)}${advisory(f)}${moods(f)}<p class="blurb">${esc(f.blurb)}</p><p class="meta">With ${esc(f.cast)}</p>${f.note ? `<p class="warn">${esc(f.note)}</p>` : ""}</div></article>`;
+}
+
+document.getElementById("months").innerHTML = MONTHS.map((m, i) => {
+  const head = `<div class="vhead"><h2>${m.name}</h2><span class="date"><small>${esc(m.theme)}</small> ${fmt(m.date)}</span></div>`;
+  const body = m.film ? chosen(FILMS[m.film], m)
+    : `<div class="votes">${m.films.map(k => voteCard(FILMS[k], m.key)).join("")}</div>`;
+  return `<section id="${m.key}" class="${i % 2 ? "band" : ""}"><div class="wrap">${head}${body}</div></section>`;
+}).join("");
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button.still.yt"); if (!b) return;
+  const box = document.createElement("div"); box.className = "still";
+  box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${b.dataset.yt}?autoplay=1&rel=0" title="Trailer" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  b.replaceWith(box);
+});
+
+/* ===== Quiet voting ===== */
+const DEMO = new URLSearchParams(location.search).has("demo");
+const ready = k => DEMO || (VOTING.formId && VOTING.fields[k]);
+const store = { get(k) { try { return localStorage.getItem("mn-vote-" + k); } catch (_) { return null; } },
+                set(k, v) { try { localStorage.setItem("mn-vote-" + k, v); } catch (_) {} } };
+let counts = {};
+
+function paintMonth(k) {
+  const mine = store.get(k);
+  document.querySelectorAll(`.vbtn[data-month="${k}"]`).forEach(b => {
+    if (!ready(k)) { b.disabled = true; b.textContent = "Voting opens soon"; return; }
+    const me = b.dataset.title === mine;
+    b.disabled = !!mine; b.classList.toggle("done", me);
+    b.textContent = me ? "✓ You voted for this" : mine ? "Vote for this movie" : "Vote for this movie";
+  });
+  const c = counts[k]; if (!c) return;
+  const total = Object.values(c).reduce((a, b) => a + b, 0);
+  if (!total) return;
+  document.querySelectorAll(`.tally[data-month="${k}"]`).forEach(t => {
+    const n = c[t.dataset.title] || 0, pct = total ? Math.round(n * 100 / total) : 0;
+    t.hidden = false; t.querySelector("span").style.width = pct + "%";
+    t.querySelector("p").textContent = `${n} vote${n === 1 ? "" : "s"} · ${pct}%`;
+  });
+}
+function paintAll() { MONTHS.filter(m => m.films).forEach(m => paintMonth(m.key)); }
+
+async function loadCounts() {
+  if (DEMO) {
+    counts = { jan: { "Last Christmas": 7, "The Holdovers": 11, "The Naughty Nine": 4 },
+      mar: { "CODA": 9, "Turning Red": 6, "The Farewell": 5, "Barbie": 8 },
+      apr: { "Polite Society": 3, "KPop Demon Hunters": 12, "West Side Story": 4, "Dune": 7 },
+      may: { "Star Wars: A New Hope": 6, "The Empire Strikes Back": 10, "Return of the Jedi": 5, "The Force Awakens": 4 } };
+    return paintAll();
+  }
+  if (!VOTING.resultsCsv) return;
+  try {
+    const rows = parseCsv(await (await fetch(VOTING.resultsCsv, { cache: "no-store" })).text());
+    const head = rows.shift() || [];
+    MONTHS.filter(m => m.films).forEach(m => {
+      const col = head.findIndex(h => h.trim().toLowerCase().startsWith(m.name.toLowerCase()));
+      if (col < 0) return;
+      counts[m.key] = {};
+      rows.forEach(r => { const v = (r[col] || "").trim(); if (v) counts[m.key][v] = (counts[m.key][v] || 0) + 1; });
+    });
+    paintAll();
+  } catch (_) { /* counts stay hidden if the sheet can't be read */ }
+}
+function parseCsv(t) {
+  const out = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i];
+    if (q) { if (c === '"' && t[i + 1] === '"') { cell += '"'; i++; } else if (c === '"') q = false; else cell += c; }
+    else if (c === '"') q = true; else if (c === ",") { row.push(cell); cell = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && t[i + 1] === "\n") i++; row.push(cell); out.push(row); row = []; cell = ""; }
+    else cell += c;
+  }
+  if (cell || row.length) { row.push(cell); out.push(row); }
+  return out;
+}
+
+document.addEventListener("click", async e => {
+  const b = e.target.closest(".vbtn"); if (!b || b.disabled) return;
+  const k = b.dataset.month, title = b.dataset.title;
+  b.disabled = true; b.textContent = "Sending…";
+  try {
+    if (!DEMO) {
+      const body = new URLSearchParams({ [VOTING.fields[k]]: title });
+      await fetch(`https://docs.google.com/forms/d/e/${VOTING.formId}/formResponse`, { method: "POST", mode: "no-cors", body });
+    }
+    store.set(k, title);
+    if (counts[k]) counts[k][title] = (counts[k][title] || 0) + 1;
+    paintMonth(k);
+  } catch (_) { b.disabled = false; b.textContent = "Couldn't send, try again"; }
+});
+
+paintAll(); loadCounts();
+
+document.getElementById("legend").innerHTML = Object.values(MOODS).map(m => `<li><span aria-hidden="true">${m.icon}</span>${esc(m.label)}</li>`).join("");
+
+document.getElementById("seasonList").innerHTML = MONTHS.map(m =>
+  `<a class="slot${m.film ? " on" : ""}" href="#${m.key}"><i>${esc(m.theme)}</i><b>${fmt(m.date)}</b><span>${m.film ? esc(FILMS[m.film].title) : "Vote: " + m.films.length + " options"}</span></a>`).join("");
+</script>
+</body>
+</html>
