@@ -113,7 +113,7 @@ button.still:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
 .fine{font-size:.85rem;color:var(--muted);margin-top:18px}
 .vbtn{font:800 .98rem/1 var(--body)}
 .vbtn:disabled{cursor:default}
-.vbtn:disabled:not(.done){opacity:.45}
+.vbtn:disabled:not(.done){opacity:.6}
 .vbtn.done{background:#7EE08A;border-color:#7EE08A;color:var(--ink);opacity:1}
 .tally{display:grid;gap:5px}
 .tally .bar{height:10px;border-radius:999px;background:rgba(255,246,229,.12);overflow:hidden}
@@ -198,6 +198,7 @@ footer img{height:60px;width:auto;display:block}
 const VOTING = {
   formId: "1FAIpQLSebmPpUCrvaVGx6MxrpXSoHMMxq2HCH6DHpsZvGGwesYpRRVQ",
   fields: { jan: "entry.1215719774", mar: "entry.964488902", apr: "entry.672642918", may: "entry.1797876935" },
+  voterField: "entry.1861306273",
   resultsCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT8Xxfd6BwaR0IDxC4t8mL-I34_L__AeadIes6bcss0vXl_W4HtUrc4tRbW72KH5RO4h-SLupzRh1sQ/pub?gid=572921237&single=true&output=csv"
 };
 
@@ -341,6 +342,16 @@ const DEMO = new URLSearchParams(location.search).has("demo");
 const ready = k => DEMO || (VOTING.formId && VOTING.fields[k]);
 const store = { get(k) { try { return localStorage.getItem("mn-vote-" + k); } catch (_) { return null; } },
                 set(k, v) { try { localStorage.setItem("mn-vote-" + k, v); } catch (_) {} } };
+/* A random ID for this device, so each device counts once and can change its vote. */
+function voterId() {
+  let id = null;
+  try { id = localStorage.getItem("mn-voter"); } catch (_) {}
+  if (!id) {
+    id = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
+    try { localStorage.setItem("mn-voter", id); } catch (_) {}
+  }
+  return id;
+}
 let counts = {};
 
 function paintMonth(k) {
@@ -348,8 +359,8 @@ function paintMonth(k) {
   document.querySelectorAll(`.vbtn[data-month="${k}"]`).forEach(b => {
     if (!ready(k)) { b.disabled = true; b.textContent = "Voting opens soon"; return; }
     const me = b.dataset.title === mine;
-    b.disabled = !!mine; b.classList.toggle("done", me);
-    b.textContent = me ? "✓ You voted for this" : mine ? "Vote for this movie" : "Vote for this movie";
+    b.disabled = me; b.classList.toggle("done", me);
+    b.textContent = me ? "✓ Your vote" : mine ? "Change my vote to this" : "Vote for this movie";
   });
   const c = counts[k]; if (!c) return;
   const total = Object.values(c).reduce((a, b) => a + b, 0);
@@ -374,11 +385,18 @@ async function loadCounts() {
   try {
     const rows = parseCsv(await (await fetch(VOTING.resultsCsv, { cache: "no-store" })).text());
     const head = rows.shift() || [];
+    const vcol = head.findIndex(h => h.trim().toLowerCase() === "voter");
     MONTHS.filter(m => m.films).forEach(m => {
       const col = head.findIndex(h => h.trim().toLowerCase().startsWith(m.name.toLowerCase()));
       if (col < 0) return;
+      const latest = new Map();               /* one vote per device: its most recent choice wins */
+      rows.forEach((r, i) => {
+        const v = (r[col] || "").trim(); if (!v) return;
+        const who = vcol >= 0 && (r[vcol] || "").trim() ? r[vcol].trim() : "row" + i;
+        latest.set(who, v);
+      });
       counts[m.key] = {};
-      rows.forEach(r => { const v = (r[col] || "").trim(); if (v) counts[m.key][v] = (counts[m.key][v] || 0) + 1; });
+      latest.forEach(v => { counts[m.key][v] = (counts[m.key][v] || 0) + 1; });
     });
     paintAll();
   } catch (_) { /* counts stay hidden if the sheet can't be read */ }
@@ -399,16 +417,20 @@ function parseCsv(t) {
 document.addEventListener("click", async e => {
   const b = e.target.closest(".vbtn"); if (!b || b.disabled) return;
   const k = b.dataset.month, title = b.dataset.title;
-  b.disabled = true; b.textContent = "Sending…";
+  document.querySelectorAll(`.vbtn[data-month="${k}"]`).forEach(x => x.disabled = true); b.textContent = "Sending…";
   try {
     if (!DEMO) {
-      const body = new URLSearchParams({ [VOTING.fields[k]]: title });
+      const body = new URLSearchParams({ [VOTING.fields[k]]: title, [VOTING.voterField]: voterId() });
       await fetch(`https://docs.google.com/forms/d/e/${VOTING.formId}/formResponse`, { method: "POST", mode: "no-cors", body });
     }
+    const prev = store.get(k);
     store.set(k, title);
-    if (counts[k]) counts[k][title] = (counts[k][title] || 0) + 1;
+    if (counts[k] && Object.keys(counts[k]).length) {
+      if (prev && counts[k][prev]) counts[k][prev]--;
+      counts[k][title] = (counts[k][title] || 0) + 1;
+    }
     paintMonth(k);
-  } catch (_) { b.disabled = false; b.textContent = "Couldn't send, try again"; }
+  } catch (_) { paintMonth(k); b.textContent = "Couldn't send, try again"; }
 });
 
 paintAll(); loadCounts();
